@@ -27,7 +27,6 @@ arithmetic = Arithmetic()
 def index():
     return render_template('index.html')  # Рендеримо HTML сторінку з формою
 
-
 @app.route('/calculate', methods=['POST'])
 
 def calculate():
