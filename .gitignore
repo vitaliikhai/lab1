@@ -1,5 +1,7 @@
 # IDE settings
 .idea/
+.idea/misc.xml
 
 # Virtual environment
 venv/
+interfaces/__pycache__
