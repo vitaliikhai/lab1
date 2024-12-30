@@ -1,9 +1,9 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template, request
 from interfaces.arithmetic import ArithmeticOperation
 
 
 class Arithmetic(ArithmeticOperation):
-    """Реалізація інтерфейсу арифметичних операцій"""
+    """Реалізація інтерфейсу арифметичних операцій_"""
 
     def add(self, a: int, b: int) -> int:
         return a + b
@@ -23,28 +23,36 @@ class Arithmetic(ArithmeticOperation):
 app = Flask(__name__)
 arithmetic = Arithmetic()
 
-@app.route('/plus/<int:a>/<int:b>', methods=['GET'])
-def add(a, b):
-    result = arithmetic.add(a, b)
-    return jsonify({"result": result})
+@app.route('/')
+def index():
+    return render_template('index.html')  # Рендеримо HTML сторінку з формою
 
-@app.route('/minus/<int:a>/<int:b>', methods=['GET'])
-def subtract(a, b):
-    result = arithmetic.subtract(a, b)
-    return jsonify({"result": result})
 
-@app.route('/multiply/<int:a>/<int:b>', methods=['GET'])
-def multiply(a, b):
-    result = arithmetic.multiply(a, b)
-    return jsonify({"result": result})
+app.route('/calculate', methods=['POST'])
 
-@app.route('/divide/<int:a>/<int:b>', methods=['GET'])
-def divide(a, b):
+
+def calculate():
     try:
-        result = arithmetic.divide(a, b)
-        return jsonify({"result": result})
+        a = int(request.form['a'])
+        b = int(request.form['b'])
+        operation = request.form['operation']
+
+        if operation == 'add':
+            result = arithmetic.add(a, b)
+        elif operation == 'subtract':
+            result = arithmetic.subtract(a, b)
+        elif operation == 'multiply':
+            result = arithmetic.multiply(a, b)
+        elif operation == 'divide':
+            result = arithmetic.divide(a, b)
+        else:
+            result = 'Invalid operation'
+
+        return render_template('index.html', result=result)
+
     except ValueError as e:
-        return jsonify({"error": str(e)}), 400
+        return render_template('index.html', error=str(e))
+
 
 if __name__ == '__main__':
     app.run(debug=True)

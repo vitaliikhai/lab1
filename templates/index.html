@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arithmetic Operations</title>
+</head>
+<body>
+    <h1>Arithmetic Operations</h1>
+
+    <!-- Форма для введення значень та операцій -->
+    <form method="post" action="/calculate">
+        <label for="a">Enter first number (a): </label>
+        <input type="text" id="a" name="a" required><br><br>
+        <label for="b">Enter second number (b): </label>
+        <input type="text" id="b" name="b" required><br><br>
+
+        <!-- Вибір операції -->
+        <label for="operation">Select operation: </label>
+        <select id="operation" name="operation">
+            <option value="add">Add (+)</option>
+            <option value="subtract">Subtract (-)</option>
+            <option value="multiply">Multiply (*)</option>
+            <option value="divide">Divide (/)</option>
+        </select><br><br>
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    <!-- Виведення результату або помилки -->
+    {% if result %}
+        <h2>Result: {{ result }}</h2>
+    {% endif %}
+    {% if error %}
+        <h2 style="color: red;">Error: {{ error }}</h2>
+    {% endif %}
+</body>
+</html>
