@@ -28,31 +28,31 @@ def index():
     return render_template('index.html')  # Рендеримо HTML сторінку з формою
 
 
-app.route('/calculate', methods=['POST'])
-
+@app.route('/calculate', methods=['POST'])
 
 def calculate():
     try:
-        a = int(request.form['a'])
-        b = int(request.form['b'])
+        # Отримуємо дані з форми
+        a = float(request.form['a'])
+        b = float(request.form['b'])
         operation = request.form['operation']
 
+        # Виконання операцій
         if operation == 'add':
-            result = arithmetic.add(a, b)
+            result = a + b
         elif operation == 'subtract':
-            result = arithmetic.subtract(a, b)
+            result = a - b
         elif operation == 'multiply':
-            result = arithmetic.multiply(a, b)
+            result = a * b
         elif operation == 'divide':
-            result = arithmetic.divide(a, b)
-        else:
-            result = 'Invalid operation'
+            if b != 0:
+                result = a / b
+            else:
+                return render_template('index.html', error="Cannot divide by zero.")
 
         return render_template('index.html', result=result)
-
-    except ValueError as e:
-        return render_template('index.html', error=str(e))
-
+    except ValueError:
+        return render_template('index.html', error="Invalid input. Please enter valid numbers.")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+        app.run(debug=True)
