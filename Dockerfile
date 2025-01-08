@@ -17,7 +17,7 @@ COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Скопіюйте увесь код застосунку в контейнер
-COPY . /app
+COPY . .
 
 # Виконайте навчання моделі перед запуском застосунку
 # RUN python .py
