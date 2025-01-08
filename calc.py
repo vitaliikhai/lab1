@@ -53,6 +53,11 @@ def calculate():
         return render_template('index.html', result=result)
     except ValueError:
         return render_template('index.html', error="Invalid input. Please enter valid numbers.")
-
 if __name__ == '__main__':
-        app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
+
+#         app.run(debug=True)
+
+# if __name__ == "__main__":
+#     from waitress import serve
+#     serve(app, host="0.0.0.0", port=80)
