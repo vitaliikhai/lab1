@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-    PATH = "C:/Users/sp/AppData/Local/Programs/Python/Python313;C:/Users/sp/AppData/Local/Programs/Python/Python313/Scripts;$PATH"
+    PATH = "C:/Users/sp/AppData/Local/Programs/Python/Python313;$PATH"
     }
     stages {
         stage('Clone Repo') {
@@ -23,7 +23,7 @@ pipeline {
                 //  для Windows
                 bat 'python --version'
                 bat 'python -m pip install -r requirements.txt '
-                bat 'python pylint calc.py test_app.py --output=pylint-report.txt --exit-zero'
+                bat 'pylint calc.py test_app.py --output=pylint-report.txt --exit-zero'
                 }
             }
         }
