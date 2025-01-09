@@ -25,8 +25,8 @@ pipeline {
                 bat 'python -m pip install -r requirements.txt '
                 bat 'pylint calc.py test_app.py --output=pylint-report.txt --exit-zero'
                 bat 'type pylint-report.txt'
-                bat 'flake8 calc.py test_app.py --ignore=E501,E302 --output-file=flake8-report.txt'
-                bat 'type flake8-report.txt'
+                bat 'flake8 calc.py test_app.py'
+                //bat 'type flake8-report.txt'
                 bat 'black calc.py test_app.py'
                 }
             }
