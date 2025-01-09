@@ -36,5 +36,14 @@ pipeline {
                 bat 'python -m unittest discover -s . -p "*.py"'
             }
         }
+        stage('Trivy FS Scan') {
+            steps {
+                // Trivy Filesystem Scan
+                script {
+                    echo 'Scan Filesystem with Trivy'
+                    bat 'trivy fs ./ --format table -o trivy-fs-report.html'
+                }
+            }
+        }
     }
 }
