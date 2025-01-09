@@ -31,5 +31,10 @@ pipeline {
                 }
             }
         }
+        stage('Run unittest') {
+            steps {
+                bat 'python -m unittest discover -s . -p "*.py"'
+            }
+        }
     }
 }
