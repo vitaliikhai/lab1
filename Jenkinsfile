@@ -14,7 +14,11 @@ pipeline {
                 //Lint test
                 script {
                     echo 'Linting Python Code'
-                    python --version
+                // Для Linux/Unix систем
+                //sh 'python --version'
+
+                //  для Windows
+                bat 'python --version'
                 }
             }
         }
