@@ -22,6 +22,7 @@ pipeline {
 
                 //  для Windows
                 bat 'python --version'
+                bat 'pip install -r requirements.txt '
                 }
             }
         }
