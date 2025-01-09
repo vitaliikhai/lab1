@@ -9,5 +9,14 @@ pipeline {
                 }
             }
         }
+        stage('Tests') {
+            steps {
+                //Lint test
+                script {
+                    echo 'Linting Python Code'
+                    python --version
+                }
+            }
+        }
     }
 }
