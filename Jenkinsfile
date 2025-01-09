@@ -23,6 +23,7 @@ pipeline {
                 //  для Windows
                 bat 'python --version'
                 bat 'python -m pip install -r requirements.txt '
+                bat 'python pylint calc.py test_app.py --output=pylint-report.txt --exit-zero'
                 }
             }
         }
