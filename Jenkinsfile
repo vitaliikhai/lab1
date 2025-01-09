@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-    PATH = "C:/Users/sp/AppData/Local/Programs/Python/Python313/python.exe;$PATH"
+    PATH = "C:/Users/sp/AppData/Local/Programs/Python/Python313;$PATH"
     }
     stages {
         stage('Clone Repo') {
