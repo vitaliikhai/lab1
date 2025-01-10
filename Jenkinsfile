@@ -54,5 +54,14 @@ pipeline {
                 }
             }
         }
+        stage('Trivy Docker Image Scan') {
+            steps {
+                // Trivy Docker Image Scan
+                script {
+                    echo 'Scanning Docker Image with Trivy.'
+                    bat 'trivy image lab2-project-calc:latest --format table -o trivy-docker-image-report.html'
+                }
+            }
+        }
     }
 }
