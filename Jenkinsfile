@@ -45,5 +45,14 @@ pipeline {
                 }
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                // Build Docker Image
+                script {
+                    echo 'Building Docker Image'
+                    docker.build("lab2-project-calc")
+                }
+            }
+        }
     }
 }
