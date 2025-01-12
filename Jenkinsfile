@@ -15,6 +15,17 @@ pipeline {
                 }
             }
         }
+        stages {
+        stage('Add Timestamp') {
+            steps {
+                script {
+                    def timestamp = new Date().format("yyyy-MM-dd HH:mm:ss")
+                    bat """
+                    echo Build #%BUILD_ID% at ${timestamp} >> .\\templates\\index.html
+                    """
+                }
+            }
+        }
         stage('Tests') {
             steps {
                 //Lint test
