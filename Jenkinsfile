@@ -2,6 +2,9 @@ pipeline {
     agent any
     environment {
     PATH = "C:/Users/sp/AppData/Local/Programs/Python/Python313;C:/Users/sp/AppData/Local/Programs/Python/Python313/Scripts;C:/kubernetes;$PATH"
+    DOCKERHUB_CREDENTIAL_ID = 'lab2-jenkins-dockerhub-token'
+    DOCKERHUB_REGISTRY = 'https://registry.hub.docker.com'
+    DOCKERHUB_REPOSITORY = 'leonovsp/lab2-project-calc'
     }
     stages {
         stage('Clone Repo') {
@@ -50,7 +53,7 @@ pipeline {
                 // Build Docker Image
                 script {
                     echo 'Building Docker Image'
-                    docker.build("lab2-project-calc")
+                    dockerImage = docker.build('${DOCKERHUB_REPOSITORY}:latest')
                 }
             }
         }
@@ -59,7 +62,18 @@ pipeline {
                 // Trivy Docker Image Scan
                 script {
                     echo 'Scanning Docker Image with Trivy.'
-                    bat 'trivy image lab2-project-calc:latest --format table -o trivy-docker-image-report.html'
+                    bat 'trivy image ${DOCKERHUB_REPOSITORY} --format table -o trivy-docker-image-report.html'
+                }
+            }
+        }
+        stage('Push Docker Image') {
+            steps {
+                // Push Docker Image to DockerHub
+                script {
+                    echo 'Pushing Docker Image to DockerHub.'
+                    docker.withRegistry('${DOCKERHUB_REGISTRY}', '${DOCKERHUB_CREDENTIAL_ID}'){
+                        dockerImage.push('latest')
+                    }
                 }
             }
         }
