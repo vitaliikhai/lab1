@@ -81,10 +81,11 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying Docker Container on the local docker server.'
+                    def containerName = DOCKERHUB_REPOSITORY.tokenize('/').last() // Витягуємо лише "lab2-project-calc"
                     bat """
-                    docker stop ${DOCKERHUB_REPOSITORY} || true
-                    docker rm ${DOCKERHUB_REPOSITORY}  || true
-                    docker run -d --name ${DOCKERHUB_REPOSITORY}  -p 5000:5000 ${DOCKERHUB_REPOSITORY}:latest
+                    docker stop ${containerName} || echo Container not running
+                    docker rm ${containerName}
+                    docker run -d --name ${containerName} -p 5000:5000 ${DOCKERHUB_REPOSITORY}:latest
                     """
                 }
             }
