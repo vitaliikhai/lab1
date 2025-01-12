@@ -77,5 +77,17 @@ pipeline {
                 }
             }
         }
+        stage('Deploy Docker Container') {
+            steps {
+                script {
+                    echo 'Deploying Docker Container on the local docker server.'
+                    bat """
+                    docker stop ${DOCKERHUB_REPOSITORY} || true
+                    docker rm ${DOCKERHUB_REPOSITORY}  || true
+                    docker run -d --name ${DOCKERHUB_REPOSITORY}  -p 5000:5000 ${DOCKERHUB_REPOSITORY}:latest
+                    """
+                }
+            }
+        }
     }
 }
