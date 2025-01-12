@@ -36,7 +36,7 @@ pipeline {
         }
         stage('Run unittest') {
             steps {
-                bat "python -m unittest discover -s . -p "*.py""
+                bat 'python -m unittest discover -s . -p "*.py"'
             }
         }
         stage('Trivy FS Scan') {
@@ -44,7 +44,7 @@ pipeline {
                 // Trivy Filesystem Scan
                 script {
                     echo 'Scan Filesystem with Trivy'
-                    bat "trivy fs ./ --format table -o trivy-fs-report.html"
+                    bat 'trivy fs ./ --format table -o trivy-fs-report.html'
                 }
             }
         }
