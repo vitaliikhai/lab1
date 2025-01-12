@@ -53,7 +53,7 @@ pipeline {
                 // Build Docker Image
                 script {
                     echo 'Building Docker Image'
-                    dockerImage = docker.build('${DOCKERHUB_REPOSITORY}:latest')
+                    dockerImage = docker.build("${DOCKERHUB_REPOSITORY}:latest")
                 }
             }
         }
@@ -71,7 +71,7 @@ pipeline {
                 // Push Docker Image to DockerHub
                 script {
                     echo 'Pushing Docker Image to DockerHub.'
-                    docker.withRegistry('${DOCKERHUB_REGISTRY}', '${DOCKERHUB_CREDENTIAL_ID}'){
+                    docker.withRegistry("${DOCKERHUB_REGISTRY}", "${DOCKERHUB_CREDENTIAL_ID}"){
                         dockerImage.push('latest')
                     }
                 }
