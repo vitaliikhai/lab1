@@ -62,7 +62,7 @@ pipeline {
                 // Trivy Docker Image Scan
                 script {
                     echo 'Scanning Docker Image with Trivy.'
-                    bat 'trivy image ${DOCKERHUB_REPOSITORY} --format table -o trivy-docker-image-report.html'
+                    bat 'trivy image ${DOCKERHUB_REPOSITORY}:latest --format table -o trivy-docker-image-report.html'
                 }
             }
         }
