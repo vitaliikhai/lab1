@@ -15,7 +15,6 @@ pipeline {
                 }
             }
         }
-        stages {
         stage('Add Timestamp') {
             steps {
                 script {
